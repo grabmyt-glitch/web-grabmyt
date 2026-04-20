@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Sidebar } from './Sidebar';
 import { ActivityFeed } from './ActivityFeed';
-import './Layout.css';
+import './Layout.scss';
 
 interface LayoutProps {
   children: ReactNode;

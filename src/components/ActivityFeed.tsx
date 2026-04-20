@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Flame, Eye, TrendingDown, Bell } from 'lucide-react';
-import './ActivityFeed.css';
+import './ActivityFeed.scss';
 
 interface ActivityItem {
   id: number;

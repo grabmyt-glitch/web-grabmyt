@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Clock, Eye, Tag, Zap } from 'lucide-react';
-import './TicketCard.css';
+import './TicketCard.scss';
 
 interface TicketCardProps {
   title: string;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Home, Search, Ticket, List, MessageSquare, User } from 'lucide-react';
-import './Sidebar.css';
+import './Sidebar.scss';
 
 export function Sidebar() {
   const [activeItem, setActiveItem] = useState('Home');
@@ -17,8 +17,7 @@ export function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <div className="logo-icon">GT</div>
-        <h2>GrabTicket</h2>
+        <img src="../images/logo.png" alt="Grab My Ticket" className="logo-image" />
       </div>
 
       <nav className="sidebar-nav">

@@ -1,7 +1,7 @@
 
 import { Layout } from './components/Layout';
 import { TicketCard } from './components/TicketCard';
-import './App.css';
+import './App.scss';
 
 function App() {
   const dummyTickets = [

@@ -8,6 +8,10 @@
   display: flex;
   flex-direction: column;
   z-index: 10;
+
+  @media (max-width: 1024px) {
+    display: none; // Hide right sidebar on tablets/mobile to save space
+  }
 }
 
 .feed-header {
@@ -15,12 +19,12 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 32px;
-}
 
-.feed-header h3 {
-  font-size: 18px;
-  color: var(--text-main);
-  letter-spacing: -0.3px;
+  h3 {
+    font-size: 18px;
+    color: var(--text-main);
+    letter-spacing: -0.3px;
+  }
 }
 
 .live-indicator {
@@ -34,14 +38,14 @@
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-}
 
-.live-indicator .dot {
-  width: 6px;
-  height: 6px;
-  background-color: var(--primary);
-  border-radius: 50%;
-  animation: dotPulse 1.5s infinite;
+  .dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    animation: dotPulse 1.5s infinite;
+  }
 }
 
 .feed-list {
@@ -59,12 +63,12 @@
   animation: slideIn 0.4s ease-out;
   border: 1px solid transparent;
   transition: all 0.2s ease;
-}
 
-.activity-item:hover {
-  border-color: var(--border-light);
-  background-color: white;
-  box-shadow: var(--shadow-sm);
+  &:hover {
+    border-color: var(--border-light);
+    background-color: white;
+    box-shadow: var(--shadow-sm);
+  }
 }
 
 .activity-icon-container {
@@ -75,21 +79,21 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-}
 
-.activity-icon-container.sold {
-  background-color: rgba(255, 90, 60, 0.1);
-  color: var(--primary);
-}
+  &.sold {
+    background-color: rgba(255, 90, 60, 0.1);
+    color: var(--primary);
+  }
 
-.activity-icon-container.viewing {
-  background-color: rgba(30, 58, 138, 0.1);
-  color: var(--secondary);
-}
+  &.viewing {
+    background-color: rgba(30, 58, 138, 0.1);
+    color: var(--secondary);
+  }
 
-.activity-icon-container.drop {
-  background-color: rgba(16, 185, 129, 0.1);
-  color: #10B981;
+  &.drop {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10B981;
+  }
 }
 
 .activity-content {
