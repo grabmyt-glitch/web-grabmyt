@@ -1,0 +1,35 @@
+/* ── Ticker strip below hero ── */
+.ticker-wrap {
+  background: #FF4500;
+  padding: 11px 0;
+  overflow: hidden;
+  border-top: none;
+  position: relative;
+}
+
+.ticker {
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: ticker 28s linear infinite;
+}
+
+.ticker-item {
+  padding: 0 32px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

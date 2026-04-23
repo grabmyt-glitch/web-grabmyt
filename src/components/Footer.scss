@@ -1,0 +1,125 @@
+/* ─── FOOTER ─── */
+footer {
+  background: #03030A;
+  padding: 60px 5% 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand {}
+
+.footer-logo {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.footer-logo em {
+  color: #FF4500;
+  font-style: normal;
+}
+
+.footer-desc {
+  font-size: 13px;
+  color: #3A3A5A;
+  line-height: 1.8;
+  max-width: 280px;
+  margin-bottom: 20px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.fsoc {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: #101024;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.fsoc:hover {
+  border-color: #FF4500;
+  background: rgba(255, 69, 0, 0.1);
+}
+
+.footer-col h4 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-col li a {
+  font-size: 13px;
+  color: #3A3A5A;
+  transition: color 0.2s;
+}
+
+.footer-col li a:hover {
+  color: #8888AA;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: #3A3A5A;
+}
+
+.footer-rules {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-rules a {
+  font-size: 12px;
+  color: #3A3A5A;
+  transition: color 0.2s;
+}
+
+.footer-rules a:hover {
+  color: #8888AA;
+}
+
+.footer-badge {
+  background: rgba(255, 69, 0, 0.08);
+  border: 1px solid rgba(255, 69, 0, 0.18);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: #FF6830;
+  font-weight: 600;
+}

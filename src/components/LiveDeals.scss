@@ -1,0 +1,242 @@
+/* ─── LIVE DEALS SECTION ─── */
+#deals {
+  background: #06060E;
+}
+
+.deals-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.deals-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.df {
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.df.on {
+  background: #FF4500;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(255, 69, 0, 0.3);
+}
+
+.df.off {
+  background: rgba(255, 255, 255, 0.05);
+  color: #3A3A5A;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.df.off:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #8888AA;
+}
+
+/* ticket cards grid */
+.tickets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 900px) {
+  .tickets-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ticket-card {
+  background: #101024;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  padding: 22px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.25s, box-shadow 0.25s;
+}
+
+.ticket-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ticket-card:hover {
+  border-color: rgba(255, 69, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 69, 0, 0.1);
+}
+
+.ticket-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255, 69, 0, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* perforated line */
+.ticket-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 72px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.tc-badge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.tc-type {
+  font-size: 11px;
+  font-weight: 700;
+  color: #3A3A5A;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.urg {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.urg-r {
+  background: #FF2D55;
+  color: #fff;
+}
+
+.urg-o {
+  background: #FF9500;
+  color: #fff;
+}
+
+.urg-g {
+  background: #00C853;
+  color: #fff;
+}
+
+.tc-route {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+.tc-op {
+  font-size: 12px;
+  color: #3A3A5A;
+  margin-bottom: 14px;
+}
+
+/* progress */
+.prog-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  height: 3px;
+  margin-bottom: 6px;
+}
+
+.prog-fill {
+  height: 3px;
+  border-radius: 4px;
+}
+
+.prog-label {
+  font-size: 10px;
+  color: #3A3A5A;
+  margin-bottom: 14px;
+}
+
+/* price area */
+.tc-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.price-left {}
+
+.price-main {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #FF4500;
+  letter-spacing: -1px;
+}
+
+.price-row2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.price-orig {
+  font-size: 12px;
+  color: #3A3A5A;
+  text-decoration: line-through;
+}
+
+.price-save {
+  font-size: 11px;
+  color: #00C853;
+  font-weight: 700;
+}
+
+.tc-meta {
+  font-size: 11px;
+  color: #3A3A5A;
+  margin-top: 4px;
+}
+
+.req-btn {
+  background: linear-gradient(135deg, #0A84FF, #3A9FFF);
+  color: #fff;
+  border: none;
+  border-radius: 11px;
+  padding: 11px 20px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  box-shadow: 0 4px 16px rgba(10, 132, 255, 0.3);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.req-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 20px rgba(10, 132, 255, 0.42);
+}

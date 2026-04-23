@@ -1,0 +1,205 @@
+/* ─── HOW IT WORKS ─── */
+#how {
+  background: linear-gradient(180deg, #06060E 0%, #0C0C1A 100%);
+}
+
+.how-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.how-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step {
+  display: flex;
+  gap: 20px;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.2s;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.2s;
+}
+
+.step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.step:last-child {
+  border-bottom: none;
+}
+
+.step:hover .step-num {
+  background: #FF4500;
+  color: #fff;
+}
+
+.step-num {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #101024;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #8888AA;
+  flex-shrink: 0;
+  transition: all 0.25s;
+}
+
+.step-body {}
+
+.step-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.step-desc {
+  font-size: 13px;
+  color: #8888AA;
+  line-height: 1.7;
+}
+
+/* Visual mock panel */
+.how-visual {
+  background: #101024;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hv-header {
+  background: #0C0C1A;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hv-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.hv-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.hv-title {
+  font-size: 12px;
+  color: #3A3A5A;
+  margin-left: 6px;
+}
+
+.hv-body {
+  padding: 20px;
+}
+
+/* chat bubbles inside visual */
+.hv-msg {
+  margin-bottom: 12px;
+}
+
+.hv-them {
+  display: flex;
+  gap: 9px;
+  max-width: 80%;
+}
+
+.hv-me {
+  display: flex;
+  gap: 9px;
+  max-width: 80%;
+  margin-left: auto;
+  flex-direction: row-reverse;
+}
+
+.hv-av {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  align-self: flex-end;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+
+.hv-bubble {
+  padding: 10px 13px;
+  border-radius: 14px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.hv-them .hv-bubble {
+  background: #161628;
+  color: #ccc;
+  border-radius: 4px 14px 14px 14px;
+}
+
+.hv-me .hv-bubble {
+  background: linear-gradient(135deg, #FF4500, #FF6830);
+  color: #fff;
+  border-radius: 14px 4px 14px 14px;
+}
+
+.hv-time {
+  font-size: 9px;
+  color: #3A3A5A;
+  margin-top: 3px;
+}
+
+.hv-me .hv-time {
+  text-align: right;
+}
+
+.hv-strip {
+  background: rgba(0, 200, 83, 0.08);
+  border: 1px solid rgba(0, 200, 83, 0.18);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.hv-strip-text {
+  font-size: 11px;
+  color: #00C853;
+  flex: 1;
+}
+
+.hv-strip-btn {
+  background: #00C853;
+  color: #fff;
+  border-radius: 7px;
+  padding: 5px 12px;
+  font-size: 10px;
+  font-weight: 800;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}

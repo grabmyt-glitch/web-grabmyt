@@ -1,0 +1,140 @@
+:root {
+  --bg: #06060E;
+  --surf: #0C0C1A;
+  --card: #101024;
+  --border: rgba(255,255,255,0.07);
+  --orange: #FF4500;
+  --orange2: #FF6830;
+  --blue: #0A84FF;
+  --green: #00C853;
+  --red: #FF2D55;
+  --amber: #FF9500;
+  --text: #F2F2FF;
+  --text2: #8888AA;
+  --text3: #3A3A5A;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ─── GRAIN OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #06060E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222240;
+  border-radius: 4px;
+}
+
+/* ────────────────────────────────────
+   SECTION WRAPPER
+──────────────────────────────────── */
+section {
+  padding: 100px 5%;
+  position: relative;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 69, 0, 0.07);
+  border: 1px solid rgba(255, 69, 0, 0.18);
+  border-radius: 20px;
+  padding: 5px 13px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #FF6830;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.section-h2 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(36px, 4vw, 54px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.section-sub {
+  font-size: 16px;
+  color: #8888AA;
+  max-width: 500px;
+  line-height: 1.7;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.7s ease forwards;
+  opacity: 0;
+}
+
+.delay-1 {
+  animation-delay: 0.1s;
+}
+
+.delay-2 {
+  animation-delay: 0.2s;
+}
+
+.delay-3 {
+  animation-delay: 0.3s;
+}
+
+.delay-4 {
+  animation-delay: 0.4s;
+}
+
+.delay-5 {
+  animation-delay: 0.5s;
+}
