@@ -8,10 +8,10 @@
   padding: 0 5%;
   display: flex;
   align-items: center;
-  height: 66px;
-  background: rgba(6, 6, 14, 0.85);
+  height: 72px;
+  background: var(--nav-bg);
   backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid var(--border);
 }
 
 .nav-logo {
@@ -19,14 +19,14 @@
   font-size: 22px;
   font-weight: 800;
   letter-spacing: -0.5px;
-  color: #fff;
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
 .nav-logo em {
-  color: #FF4500;
+  color: var(--accent);
   font-style: normal;
 }
 
@@ -38,12 +38,12 @@
 
 .nav-link {
   font-size: 13px;
-  color: #8888AA;
+  color: var(--text3);
   transition: color 0.2s;
 }
 
 .nav-link:hover {
-  color: #fff;
+  color: var(--text);
 }
 
 .nav-right {
@@ -53,49 +53,69 @@
   align-items: center;
 }
 
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text2);
+  padding: 8px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
 .nav-login {
   font-size: 13px;
-  color: #8888AA;
+  color: var(--text3);
   padding: 8px 18px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  border: 1px solid var(--border);
   transition: all 0.2s;
 }
 
 .nav-login:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  border-color: var(--text3);
+  color: var(--text);
 }
 
 .nav-cta {
   font-size: 13px;
   font-weight: 700;
-  background: #FF4500;
+  background: var(--accent);
   color: #fff;
-  padding: 9px 20px;
-  border-radius: 9px;
-  box-shadow: 0 4px 16px rgba(255, 69, 0, 0.3);
+  padding: 10px 22px;
+  border-radius: 12px;
+  box-shadow: 0 14px 36px rgba(255, 90, 60, 0.24);
   transition: all 0.2s;
   font-family: 'Bricolage Grotesque', sans-serif;
 }
 
 .nav-cta:hover {
-  background: #FF6830;
+  background: #ff7a4a;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(255, 69, 0, 0.4);
+  box-shadow: 0 16px 42px rgba(255, 90, 60, 0.28);
 }
 
 .nav-live {
-  background: rgba(0, 200, 83, 0.1);
-  border: 1px solid rgba(0, 200, 83, 0.22);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.22);
   border-radius: 20px;
-  padding: 4px 11px;
+  padding: 6px 12px;
   font-size: 11px;
   font-weight: 700;
-  color: #00C853;
+  color: var(--green);
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
 }
 
 .live-dot {

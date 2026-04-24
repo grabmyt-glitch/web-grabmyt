@@ -1,17 +1,39 @@
 :root {
   --bg: #06060E;
-  --surf: #0C0C1A;
+  --surf: rgba(12, 12, 26, 0.9);
   --card: #101024;
-  --border: rgba(255,255,255,0.07);
-  --orange: #FF4500;
-  --orange2: #FF6830;
+  --border: rgba(255, 255, 255, 0.08);
+  --nav-bg: rgba(6, 6, 14, 0.92);
+  --text: #F2F2FF;
+  --text2: #B8C2FF;
+  --text3: #8888AA;
+  --muted: rgba(255, 255, 255, 0.6);
+  --accent: #FF4500;
+  --accent-soft: rgba(255, 90, 60, 0.18);
   --blue: #0A84FF;
   --green: #00C853;
   --red: #FF2D55;
   --amber: #FF9500;
-  --text: #F2F2FF;
-  --text2: #8888AA;
-  --text3: #3A3A5A;
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+.light-theme {
+  --bg: #F8F9FD;
+  --surf: rgba(255, 255, 255, 0.88);
+  --card: #FFFFFF;
+  --border: rgba(15, 23, 42, 0.08);
+  --nav-bg: rgba(255, 255, 255, 0.92);
+  --text: #0F172A;
+  --text2: #475569;
+  --text3: #64748B;
+  --muted: rgba(15, 23, 42, 0.55);
+  --accent: #FF6D2D;
+  --accent-soft: rgba(255, 109, 45, 0.16);
+  --blue: #2563EB;
+  --green: #10B981;
+  --red: #EF4444;
+  --amber: #F59E0B;
+  --shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
 }
 
 *, *::before, *::after {
@@ -29,6 +51,58 @@ body {
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
   overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.light-theme body::before {
+  opacity: 0.18;
+}
+
+section {
+  padding: 100px 5%;
+  position: relative;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(255, 109, 45, 0.18);
+  border-radius: 20px;
+  padding: 5px 13px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.section-h2 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(36px, 4vw, 54px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.section-sub {
+  font-size: 16px;
+  color: var(--text3);
+  max-width: 500px;
+  line-height: 1.7;
 }
 
 a {

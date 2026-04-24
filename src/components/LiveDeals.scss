@@ -1,6 +1,6 @@
 /* ─── LIVE DEALS SECTION ─── */
 #deals {
-  background: #06060E;
+  background: transparent;
 }
 
 .deals-header {
@@ -57,8 +57,8 @@
 }
 
 .ticket-card {
-  background: #101024;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 18px;
   padding: 22px 24px;
   position: relative;
@@ -76,9 +76,9 @@
 }
 
 .ticket-card:hover {
-  border-color: rgba(255, 69, 0, 0.3);
+  border-color: rgba(255, 109, 45, 0.35);
   transform: translateY(-4px);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 69, 0, 0.1);
+  box-shadow: var(--shadow), 0 0 0 1px rgba(255, 109, 45, 0.1);
 }
 
 .ticket-card::before {
@@ -113,7 +113,7 @@
 .tc-type {
   font-size: 11px;
   font-weight: 700;
-  color: #3A3A5A;
+  color: var(--text3);
   letter-spacing: 1px;
   text-transform: uppercase;
   display: flex;
@@ -148,7 +148,7 @@
   font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 20px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text);
   margin-bottom: 4px;
   line-height: 1.2;
   letter-spacing: -0.5px;
@@ -156,7 +156,7 @@
 
 .tc-op {
   font-size: 12px;
-  color: #3A3A5A;
+  color: var(--text3);
   margin-bottom: 14px;
 }
 
@@ -192,7 +192,7 @@
   font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 28px;
   font-weight: 800;
-  color: #FF4500;
+  color: var(--accent);
   letter-spacing: -1px;
 }
 
@@ -205,7 +205,7 @@
 
 .price-orig {
   font-size: 12px;
-  color: #3A3A5A;
+  color: var(--text3);
   text-decoration: line-through;
 }
 
@@ -217,7 +217,7 @@
 
 .tc-meta {
   font-size: 11px;
-  color: #3A3A5A;
+  color: var(--text3);
   margin-top: 4px;
 }
 
