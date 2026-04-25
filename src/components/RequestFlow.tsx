@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+"use client";import React, { useEffect, useMemo, useState } from 'react';
 import { Clock, Sparkles, MessageCircle, CheckCircle2, XCircle } from 'lucide-react';
 import Chat from './Chat';
 import './RequestFlow.scss';

@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Moon, SunMedium } from 'lucide-react';
 import './Navbar.scss';
 
@@ -19,7 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
         <a href="#how" className="nav-link">How It Works</a>
         <a href="#features" className="nav-link">Features</a>
         <a href="#about" className="nav-link">About</a>
-        <Link to="/request-flow" className="nav-link">Request Flow</Link>
+        <Link href="/request-flow" className="nav-link">Request Flow</Link>
       </div>
       <div className="nav-right">
         <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
@@ -30,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
           <div className="live-dot"></div>12 live now
         </div>
         <a href="#" className="nav-login">Log in</a>
-        <Link to="/sell-ticket" className="nav-cta">List a Ticket →</Link>
+        <Link href="/sell-ticket" className="nav-cta">List a Ticket →</Link>
       </div>
     </nav>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import './Hero.scss';
 
 const Hero: React.FC = () => {
@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
 
           <div className="hero-btns fade-up delay-3">
             <a href="#deals" className="btn-primary">🔍 Browse Live Deals</a>
-            <Link to="/sell-ticket" className="btn-outline">💸 List Your Ticket</Link>
+            <Link href="/sell-ticket" className="btn-outline">💸 List Your Ticket</Link>
           </div>
 
           <div className="hero-stats fade-up delay-4">
