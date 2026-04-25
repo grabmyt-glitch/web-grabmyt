@@ -1,15 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Clock, Send, Paperclip, Sparkles,  MessageCircle, CheckCircle2, XCircle,  } from 'lucide-react';
+import { Clock, Sparkles, MessageCircle, CheckCircle2, XCircle } from 'lucide-react';
+import Chat from './Chat';
 import './RequestFlow.scss';
 
 type RequestStatus = 'idle' | 'pending' | 'accepted' | 'rejected' | 'completed';
-
-type ChatMessage = {
-  id: number;
-  author: 'buyer' | 'seller' | 'system';
-  text: string;
-  time: string;
-};
 
 const ticket = {
   title: 'Inception (IMAX) · Premium Seat G7',
@@ -29,20 +23,15 @@ const buyer = {
   rating: 4.9,
 };
 
+const buyerId = 'buyer-neha';
+const sellerId = 'seller-kiran';
+const ticketId = 'ticket-inception-imax-g7';
+
 const RequestFlow: React.FC = () => {
   const [status, setStatus] = useState<RequestStatus>('idle');
   const [requestMessage, setRequestMessage] = useState('Hi, I’m interested in this ticket — can you hold it for me?');
   const [sellerTimer, setSellerTimer] = useState(300);
   const [dealTimer, setDealTimer] = useState(900);
-  const [chatInput, setChatInput] = useState('Thanks! I can pay right away.');
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: 1,
-      author: 'system',
-      text: 'Request submitted. Waiting for seller approval.',
-      time: 'Now',
-    },
-  ]);
   const [sellerNotice, setSellerNotice] = useState('');
 
   useEffect(() => {
@@ -74,40 +63,11 @@ const RequestFlow: React.FC = () => {
   const handleSendRequest = () => {
     setStatus('pending');
     setSellerTimer(300);
-    setMessages([
-      {
-        id: 1,
-        author: 'system',
-        text: 'Request sent to seller.',
-        time: 'Now',
-      },
-      {
-        id: 2,
-        author: 'buyer',
-        text: requestMessage,
-        time: 'Now',
-      },
-    ]);
   };
 
   const handleAccept = () => {
     setStatus('accepted');
     setDealTimer(900);
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: prev.length + 1,
-        author: 'system',
-        text: 'Request Accepted — chat unlocked.',
-        time: 'Now',
-      },
-      {
-        id: prev.length + 2,
-        author: 'seller',
-        text: 'Happy to connect! I’ve held it for you. Please complete the deal within 15 minutes.',
-        time: 'Now',
-      },
-    ]);
   };
 
   const handleReject = () => {
@@ -115,31 +75,8 @@ const RequestFlow: React.FC = () => {
     setSellerNotice('This request was declined. Try another deal or send a new request.');
   };
 
-  const handleSendChat = () => {
-    if (!chatInput.trim()) return;
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: prev.length + 1,
-        author: 'buyer',
-        text: chatInput,
-        time: 'Now',
-      },
-    ]);
-    setChatInput('');
-  };
-
   const handleCompleteDeal = () => {
     setStatus('completed');
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: prev.length + 1,
-        author: 'system',
-        text: 'Deal completed successfully!',
-        time: 'Now',
-      },
-    ]);
   };
 
   const highDemandTag = useMemo(() => {
@@ -331,47 +268,26 @@ const RequestFlow: React.FC = () => {
         </div>
 
         <div className="chat-center">
-          <div className="chat-window-header">
-            <div>
-              <div className="chat-title">{ticket.sellerName}</div>
-              <div className="chat-status">Online <span className="online-dot" /></div>
-            </div>
-            <div className="chat-timer">
-              <Clock size={16} />
-              {status === 'accepted' ? `${formatCountdown(dealTimer)} left` : 'Waiting for approval'}
-            </div>
-          </div>
-
-          <div className="chat-messages">
-            {messages.map((message) => (
-              <div key={message.id} className={`chat-message ${message.author}`}>
-                {message.author === 'system' ? (
-                  <div className="system-msg">{message.text}</div>
-                ) : (
-                  <>
-                    <div className="message-text">{message.text}</div>
-                    <div className="message-time">{message.time}</div>
-                  </>
-                )}
+          {status === 'accepted' ? (
+            <Chat buyerId={buyerId} sellerId={sellerId} ticketId={ticketId} />
+          ) : (
+            <div className="chat-locked">
+              <div className="chat-window-header">
+                <div>
+                  <div className="chat-title">{ticket.sellerName}</div>
+                  <div className="chat-status">Online <span className="online-dot" /></div>
+                </div>
+                <div className="chat-timer">
+                  <Clock size={16} />
+                  Waiting for approval
+                </div>
               </div>
-            ))}
-          </div>
-
-          <div className="chat-input-row">
-            <div className="attachment-btn">
-              <Paperclip size={18} />
+              <div className="chat-placeholder">
+                <p className="chat-placeholder-title">Chat unlocks after seller accepts the request.</p>
+                <p className="chat-placeholder-copy">Once the request is approved, your live Firestore chat will appear here.</p>
+              </div>
             </div>
-            <input
-              type="text"
-              value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
-              disabled={status !== 'accepted'}
-              placeholder={status === 'accepted' ? 'Type a message...' : 'Chat unlocks after acceptance'}
-            />
-            <button className="send-btn" onClick={handleSendChat} disabled={status !== 'accepted'}>
-              <Send size={16} />
-            </button>
-          </div>
+          )}
         </div>
 
         <div className="chat-right sticky-summary">
