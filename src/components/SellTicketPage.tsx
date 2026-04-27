@@ -82,9 +82,9 @@ const SellTicketPage: React.FC = () => {
           </div>
 
           <div className="sell-badge">Verified last-minute listings</div>
-          <Link to="/" className="secondary-link">← Back to home</Link>
+          <Link href="/sell-tickets" className="secondary-link">← Back to home</Link>
         </div>
-
+        ``
         <div className="sell-ticket-right">
           <div className="form-card">
             <div className="section-tag">Create listing</div>

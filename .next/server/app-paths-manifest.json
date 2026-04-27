@@ -1,7 +1,7 @@
 {
-  "/api/v1/tickets/route": "app/api/v1/tickets/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
   "/request-flow/page": "app/request-flow/page.js",
   "/sell-ticket/page": "app/sell-ticket/page.js",
-  "/page": "app/page.js"
+  "/(auth)/welcome/page": "app/(auth)/welcome/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js"
 }

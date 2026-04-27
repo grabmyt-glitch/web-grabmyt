@@ -1,0 +1,62 @@
+{
+  "pages": {
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/page.css",
+      "static/chunks/app/page.js"
+    ],
+    "/(auth)/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(auth)/layout.js"
+    ],
+    "/(auth)/login/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(auth)/login/page.css",
+      "static/chunks/app/(auth)/login/page.js"
+    ],
+    "/(auth)/signup/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(auth)/signup/page.css",
+      "static/chunks/app/(auth)/signup/page.js"
+    ],
+    "/api/v1/auth/signup/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/v1/auth/signup/route.js"
+    ],
+    "/(auth)/verify-email/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(auth)/verify-email/page.css",
+      "static/chunks/app/(auth)/verify-email/page.js"
+    ],
+    "/(auth)/welcome/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(auth)/welcome/page.css",
+      "static/chunks/app/(auth)/welcome/page.js"
+    ],
+    "/request-flow/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/request-flow/page.css",
+      "static/chunks/app/request-flow/page.js"
+    ],
+    "/sell-ticket/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/sell-ticket/page.css",
+      "static/chunks/app/sell-ticket/page.js"
+    ]
+  }
+}

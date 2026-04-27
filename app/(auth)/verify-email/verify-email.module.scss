@@ -1,0 +1,580 @@
+// Light Theme Auth Variables
+$canvas: #F5F5F5;
+$frame: #FFFFFF;
+$ink: #1A1A1A;
+$ink2: #4A4A4A;
+$ink3: #8A8A8A;
+$rule: #E0E0E0;
+
+// App Colors - Light Theme
+$bg: #FAFAFA;
+$surf: #FFFFFF;
+$card: #FFFFFF;
+$bdr: rgba(0, 0, 0, 0.08);
+$orange: #FF4500;
+$orange2: #FF6830;
+$blue: #0A84FF;
+$green: #00C853;
+$red: #FF2D55;
+$amber: #FF9500;
+$text: #1A1A1A;
+$text2: #666666;
+$text3: #999999;
+
+.authPage {
+  display: flex;
+  min-height: 100vh;
+  background: $bg;
+}
+
+// LEFT PANEL — Brand side
+.authLeft {
+  width: 44%;
+  background: linear-gradient(160deg, #0A0A18 0%, #0F0F22 60%, #1A0A00 100%);
+  padding: 44px 40px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 69, 0, 0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: -60px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(255, 69, 0, 0.1) 0%, transparent 65%);
+    pointer-events: none;
+  }
+}
+
+.alLogo {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: auto;
+
+  em {
+    color: $orange;
+    font-style: normal;
+  }
+}
+
+.alBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.alTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 69, 0, 0.1);
+  border: 1px solid rgba(255, 69, 0, 0.22);
+  border-radius: 20px;
+  padding: 4px 11px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #FF6830;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.alTagSuccess {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 200, 83, 0.1);
+  border: 1px solid rgba(0, 200, 83, 0.22);
+  border-radius: 20px;
+  padding: 4px 11px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #00C853;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.alH {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.8px;
+  margin-bottom: 14px;
+
+  em {
+    color: $orange;
+    font-style: normal;
+  }
+}
+
+.alSub {
+  font-size: 13px;
+  color: #6666AA;
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+
+// Progress Steps
+.progressSteps {
+  margin-top: 24px;
+}
+
+.stepItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+
+  &.pending {
+    opacity: 0.4;
+  }
+}
+
+.stepCircle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: $orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  flex-shrink: 0;
+
+  .pending & {
+    background: transparent;
+    border: 1.5px solid #3A3A5A;
+    color: #3A3A5A;
+  }
+}
+
+.stepCircleDone {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: $green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.stepLabel {
+  font-size: 12px;
+  color: #fff;
+  font-weight: 600;
+
+  .pending & {
+    color: #4A4A6A;
+  }
+}
+
+.stepLabelDone {
+  font-size: 12px;
+  color: #4A6A4A;
+  font-weight: 600;
+}
+
+.stepStatus {
+  margin-left: auto;
+  font-size: 10px;
+  color: #FF6830;
+}
+
+.stepStatusDone {
+  margin-left: auto;
+  font-size: 10px;
+  color: #00C853;
+}
+
+// Email Preview Card
+.emailPreview {
+  margin-top: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.emailPreviewHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+
+  span {
+    font-size: 18px;
+  }
+
+  div {
+    font-size: 11px;
+    color: #6666AA;
+  }
+}
+
+.emailPreviewSub {
+  font-size: 11px;
+  color: #5A5A7A;
+}
+
+.emailPreviewCode {
+  margin-top: 10px;
+  background: rgba(255, 69, 0, 0.07);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
+
+.codeDigits {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: $orange;
+  letter-spacing: 6px;
+}
+
+.codeExpiry {
+  font-size: 9px;
+  color: #4A4A6A;
+  margin-top: 4px;
+}
+
+// RIGHT PANEL — Form side
+.authRight {
+  flex: 1;
+  background: $bg;
+  padding: 44px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formContainer {
+  max-width: 360px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.emailIconWrap {
+  margin-bottom: 22px;
+}
+
+.emailIcon {
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
+  margin: 0 auto;
+  background: rgba(255, 69, 0, 0.08);
+  border: 1px solid rgba(255, 69, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  box-shadow: 0 0 0 8px rgba(255, 69, 0, 0.04);
+}
+
+.arH {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: $text;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.arSub {
+  font-size: 13px;
+  color: $text2;
+  line-height: 1.7;
+  margin-bottom: 28px;
+
+  strong {
+    color: $text;
+  }
+}
+
+// OTP Input
+.otpRow {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.otpBox {
+  width: 52px;
+  height: 60px;
+  border-radius: 12px;
+  background: $surf;
+  border: 1.5px solid $bdr;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: $text;
+  text-align: center;
+  transition: all 0.2s ease;
+
+  &.filled {
+    border-color: rgba(255, 69, 0, 0.4);
+    background: rgba(255, 69, 0, 0.07);
+    color: $orange;
+  }
+
+  &.active {
+    border-color: $orange;
+    box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.15);
+  }
+
+  &.error {
+    border-color: rgba(255, 45, 85, 0.5);
+    background: rgba(255, 45, 85, 0.07);
+    color: $red;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $orange;
+    box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.15);
+  }
+}
+
+.otpTimer {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: $amber;
+  margin-bottom: 8px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+
+.otpHint {
+  text-align: center;
+  font-size: 12px;
+  color: $text3;
+  margin-bottom: 20px;
+}
+
+.otpError {
+  text-align: center;
+  font-size: 11px;
+  color: $red;
+  margin-bottom: 16px;
+}
+
+.otpResend {
+  text-align: center;
+  font-size: 12px;
+  color: $text3;
+  margin-top: 14px;
+
+  span {
+    color: $orange;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.footerLink {
+  font-size: 11px;
+  color: $text3;
+  margin-top: 12px;
+
+  span {
+    color: $orange;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Submit Button
+.submitBtn {
+  width: 100%;
+  padding: 14px 0;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, $orange, $orange2);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  box-shadow: 0 6px 20px rgba(255, 69, 0, 0.35);
+  cursor: pointer;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.submitBtnBlue {
+  @extend .submitBtn;
+  background: linear-gradient(135deg, $blue, #3A9FFF);
+  box-shadow: 0 6px 20px rgba(10, 132, 255, 0.32);
+  margin-top: 16px;
+
+  &:hover:not(:disabled) {
+    box-shadow: 0 8px 25px rgba(10, 132, 255, 0.4);
+  }
+}
+
+// Success State
+.successWrap {
+  text-align: center;
+}
+
+.successRing {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 18px;
+  background: rgba(0, 200, 83, 0.1);
+  border: 2px solid rgba(0, 200, 83, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 0 0 12px rgba(0, 200, 83, 0.06);
+}
+
+.successH {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: $green;
+  margin-bottom: 8px;
+}
+
+.successSub {
+  font-size: 13px;
+  color: $text2;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+// Quick Actions
+.quickActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.actionCard {
+  background: rgba(255, 69, 0, 0.07);
+  border: 1px solid rgba(255, 69, 0, 0.18);
+  border-radius: 13px;
+  padding: 16px 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 69, 0, 0.12);
+  }
+}
+
+.actionCardBlue {
+  @extend .actionCard;
+  background: rgba(10, 132, 255, 0.07);
+  border-color: rgba(10, 132, 255, 0.18);
+
+  &:hover {
+    background: rgba(10, 132, 255, 0.12);
+  }
+}
+
+.actionIcon {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.actionTitle {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: $text;
+  margin-bottom: 3px;
+}
+
+.actionSub {
+  font-size: 10px;
+  color: $text3;
+}
+
+// Responsive
+@media (max-width: 1024px) {
+  .authPage {
+    flex-direction: column;
+  }
+
+  .authLeft {
+    width: 100%;
+    padding: 30px;
+    min-height: auto;
+  }
+
+  .authRight {
+    padding: 30px;
+  }
+
+  .otpBox {
+    width: 42px;
+    height: 50px;
+    font-size: 18px;
+  }
+
+  .quickActions {
+    grid-template-columns: 1fr;
+  }
+}

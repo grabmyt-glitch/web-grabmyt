@@ -14,7 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
   return (
     <nav className="nav">
       <div className="nav-logo">
-        <em>⚡</em>LastPass
+        <em>⚡</em>Grab My Ticket
       </div>
       <div className="nav-links">
         <a href="#deals" className="nav-link">Browse Deals</a>
@@ -31,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
         <div className="nav-live">
           <div className="live-dot"></div>12 live now
         </div>
-        <a href="#" className="nav-login">Log in</a>
+        <Link href="/login" className="nav-login">Log in</Link>
         <Link href="/sell-ticket" className="nav-cta">List a Ticket →</Link>
       </div>
     </nav>
