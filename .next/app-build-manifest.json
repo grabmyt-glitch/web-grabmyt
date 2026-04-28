@@ -29,11 +29,6 @@
       "static/css/app/(auth)/signup/page.css",
       "static/chunks/app/(auth)/signup/page.js"
     ],
-    "/api/v1/auth/signup/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/v1/auth/signup/route.js"
-    ],
     "/(auth)/verify-email/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -45,18 +40,6 @@
       "static/chunks/main-app.js",
       "static/css/app/(auth)/welcome/page.css",
       "static/chunks/app/(auth)/welcome/page.js"
-    ],
-    "/request-flow/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/request-flow/page.css",
-      "static/chunks/app/request-flow/page.js"
-    ],
-    "/sell-ticket/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/sell-ticket/page.css",
-      "static/chunks/app/sell-ticket/page.js"
     ]
   }
 }

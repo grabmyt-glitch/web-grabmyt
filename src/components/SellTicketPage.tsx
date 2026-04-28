@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { API_ENDPOINTS } from '../constants/api';
 import './SellTicketPage.scss';
 
 const initialFormState = {
@@ -32,7 +33,7 @@ const SellTicketPage: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/v1/tickets', {
+      const response = await fetch(API_ENDPOINTS.TICKETS.CREATE, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),

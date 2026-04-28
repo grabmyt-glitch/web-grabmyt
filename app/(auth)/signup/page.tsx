@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "./signup.module.scss";
+import { API_ENDPOINTS } from "@/constants/api";
 
 type Role = "buyer" | "seller" | "both";
 
@@ -62,7 +63,7 @@ export default function SignupPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/v1/auth/signup", {
+      const response = await fetch(API_ENDPOINTS.AUTH.SIGNUP, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -77,8 +78,8 @@ export default function SignupPage() {
 
       if (result.success) {
         console.log("Signup successful:", result.data);
-        alert(result.message);
-        router.push("/verify-email");
+        // Pass email to verification page
+        router.push(`/verify-email?email=${encodeURIComponent(formData.email)}&firstName=${encodeURIComponent(formData.firstName)}`);
       } else {
         setErrors({ server: result.message || "Signup failed" });
       }

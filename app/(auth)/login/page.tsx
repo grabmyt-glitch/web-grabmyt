@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import styles from "./login.module.scss";
+import { API_ENDPOINTS } from "@/constants/api";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/v1/auth/signin", {
+      const response = await fetch(API_ENDPOINTS.AUTH.SIGNIN, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

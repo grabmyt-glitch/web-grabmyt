@@ -1,17 +1,23 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./verify-email.module.scss";
+import { API_ENDPOINTS } from "@/constants/api";
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email") || "your email";
+  const firstName = searchParams.get("firstName") || "there";
+
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [timer, setTimer] = useState(543); // 8:43 in seconds
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [verifiedUser, setVerifiedUser] = useState<any>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
@@ -73,23 +79,44 @@ export default function VerifyEmailPage() {
     }
 
     setIsLoading(true);
+    setError("");
 
-    // Simulate verification
-    setTimeout(() => {
-      setIsLoading(false);
-      if (otpString === "999999") {
-        setError("Incorrect code — please try again");
-      } else {
+    try {
+      const response = await fetch(API_ENDPOINTS.AUTH.VERIFY_EMAIL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          otp: otpString,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
         setIsVerified(true);
-        router.push("/welcome");
+        setVerifiedUser(result.data);
+        // Store token if needed
+        if (result.data.accessToken) {
+          localStorage.setItem("token", result.data.accessToken);
+          localStorage.setItem("user", JSON.stringify(result.data));
+        }
+      } else {
+        setError(result.message || "Verification failed. Please try again.");
       }
-    }, 1500);
+    } catch (err) {
+      setError("An error occurred. Please check your connection.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleResend = () => {
+    // In a real app, you'd call a resend OTP API here
     setTimer(543);
     setOtp(["", "", "", "", "", ""]);
     inputRefs.current[0]?.focus();
+    alert("In a production app, this would trigger a new OTP email.");
   };
 
   const allFilled = otp.every((digit) => digit !== "");
@@ -106,7 +133,7 @@ export default function VerifyEmailPage() {
             <h1 className={styles.alH}>
               You're all
               <br />
-              set, <em style={{ color: "#00C853" }}>Arjun!</em>
+              set, <em style={{ color: "#00C853" }}>{verifiedUser?.firstName || firstName}!</em>
             </h1>
             <p className={styles.alSub}>
               Your account is verified and ready. Start browsing last-minute deals or list your first ticket.
@@ -135,18 +162,18 @@ export default function VerifyEmailPage() {
               <div className={styles.successRing}>🎉</div>
               <h2 className={styles.successH}>Email Verified!</h2>
               <p className={styles.successSub}>
-                Welcome to LastPass, Arjun!
+                Welcome to LastPass, {verifiedUser?.firstName || firstName}!
                 <br />
                 Your account is ready to use.
               </p>
 
               <div className={styles.quickActions}>
-                <div className={styles.actionCard}>
+                <div className={styles.actionCard} onClick={() => router.push("/")}>
                   <div className={styles.actionIcon}>🔍</div>
                   <div className={styles.actionTitle}>Browse Deals</div>
                   <div className={styles.actionSub}>Find last-minute tickets</div>
                 </div>
-                <div className={styles.actionCardBlue}>
+                <div className={styles.actionCardBlue} onClick={() => router.push("/sell-tickets")}>
                   <div className={styles.actionIcon}>💸</div>
                   <div className={styles.actionTitle}>List a Ticket</div>
                   <div className={styles.actionSub}>Sell yours instantly</div>
@@ -208,11 +235,11 @@ export default function VerifyEmailPage() {
           <div className={styles.emailPreview}>
             <div className={styles.emailPreviewHeader}>
               <span>📬</span>
-              <div>noreply@lastpass.in → arjun@email.com</div>
+              <div>noreply@lastpass.in → {email}</div>
             </div>
             <div className={styles.emailPreviewSub}>Subject: Your LastPass verification code</div>
             <div className={styles.emailPreviewCode}>
-              <div className={styles.codeDigits}>847 291</div>
+              <div className={styles.codeDigits}>XXX XXX</div>
               <div className={styles.codeExpiry}>Expires in 10 minutes</div>
             </div>
           </div>
@@ -230,7 +257,7 @@ export default function VerifyEmailPage() {
           <p className={styles.arSub}>
             We sent a 6-digit code to
             <br />
-            <strong>arjun@email.com</strong>
+            <strong>{email}</strong>
           </p>
 
           {/* OTP Input */}
@@ -238,7 +265,9 @@ export default function VerifyEmailPage() {
             {otp.map((digit, index) => (
               <input
                 key={index}
-                ref={(el) => (inputRefs.current[index] = el)}
+                ref={(el) => {
+                  inputRefs.current[index] = el;
+                }}
                 type="text"
                 inputMode="numeric"
                 maxLength={1}
@@ -279,3 +308,11 @@ export default function VerifyEmailPage() {
     </div>
   );
 }
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyEmailContent />
+    </Suspense>
+  );
+}
