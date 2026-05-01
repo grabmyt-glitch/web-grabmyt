@@ -29,17 +29,21 @@
       "static/css/app/(auth)/signup/page.css",
       "static/chunks/app/(auth)/signup/page.js"
     ],
+    "/api/v1/auth/signup/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/v1/auth/signup/route.js"
+    ],
     "/(auth)/verify-email/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/(auth)/verify-email/page.css",
       "static/chunks/app/(auth)/verify-email/page.js"
     ],
-    "/(auth)/welcome/page": [
+    "/api/v1/auth/verify-email/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/(auth)/welcome/page.css",
-      "static/chunks/app/(auth)/welcome/page.js"
+      "static/chunks/app/api/v1/auth/verify-email/route.js"
     ]
   }
 }

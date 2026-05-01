@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./forgot-password.module.scss";
+import { API_ENDPOINTS } from "@/constants/api";
 
 type Step = "email" | "sent" | "reset";
 
@@ -14,14 +15,15 @@ export default function ForgotPasswordPage() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
 
   // Timer for resend
-  useState(() => {
+  useEffect(() => {
     if (step === "sent" && timer > 0) {
       const interval = setInterval(() => setTimer((t) => t - 1), 1000);
       return () => clearInterval(interval);
     }
-  });
+  }, [step, timer]);
 
   const getPasswordStrength = (password: string) => {
     if (password.length < 4) return { level: 1, label: "Very weak" };
@@ -35,24 +37,49 @@ export default function ForgotPasswordPage() {
 
   const handleSendLink = async () => {
     setIsLoading(true);
-    setTimeout(() => {
+    setError("");
+    
+    try {
+      const response = await fetch(API_ENDPOINTS.AUTH.FORGOT_PASSWORD, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStep("sent");
+      } else {
+        setError(result.message || "Failed to send reset link");
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.");
+    } finally {
       setIsLoading(false);
-      setStep("sent");
-    }, 1500);
+    }
   };
 
   const handleResend = () => {
+    handleSendLink();
     setTimer(58);
   };
 
   const handleResetPassword = async () => {
     if (!passwordsMatch) return;
     setIsLoading(true);
-    setTimeout(() => {
+    setError("");
+    
+    try {
+      // In production, call reset password API with token
+      setTimeout(() => {
+        setIsLoading(false);
+        window.location.href = "/login";
+      }, 1500);
+    } catch (err) {
+      setError("Failed to reset password. Please try again.");
       setIsLoading(false);
-      // Redirect to login
-      window.location.href = "/login";
-    }, 1500);
+    }
   };
 
   // Step 1: Enter Email

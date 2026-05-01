@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Moon, SunMedium } from 'lucide-react';
 import './Navbar.scss';
+import { useAuth } from '@/context/AuthContext';
 
 interface NavbarProps {
   theme: 'dark' | 'light';
@@ -11,10 +12,15 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
+  const { user, logout } = useAuth();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   return (
     <nav className="nav">
       <div className="nav-logo">
-        <em>⚡</em>Grab My Ticket
+        <Link href="/" style={{textDecoration: 'none', color: 'inherit'}}>
+          <em>⚡</em>Grab My Ticket
+        </Link>
       </div>
       <div className="nav-links">
         <a href="#deals" className="nav-link">Browse Deals</a>
@@ -31,7 +37,42 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
         <div className="nav-live">
           <div className="live-dot"></div>12 live now
         </div>
-        <Link href="/login" className="nav-login">Log in</Link>
+        
+        {user ? (
+          <div className="user-menu" onMouseLeave={() => setIsDropdownOpen(false)}>
+            <div 
+              className="user-avatar" 
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              {user.avatar || 'U'}
+            </div>
+            
+            {isDropdownOpen && (
+              <div className="user-dropdown">
+                <div className="user-dropdown-header">
+                  <div className="u-name">{user.name}</div>
+                  <div className="u-email">{user.email}</div>
+                </div>
+                <div className="user-dropdown-body">
+                  <Link href="/settings/profile" className="u-item">
+                    <span>⚙️</span> Profile Settings
+                  </Link>
+                  <Link href="/settings/monitoring" className="u-item">
+                    <span>📊</span> Dashboard
+                  </Link>
+                  <div className="u-divider"></div>
+                  <button onClick={logout} className="u-item u-logout">
+                    <span>🚪</span> Log out
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Link href="/login" className="nav-login">Log in</Link>
+        )}
+        
         <Link href="/sell-ticket" className="nav-cta">List a Ticket →</Link>
       </div>
     </nav>

@@ -7,6 +7,7 @@ export const API_ENDPOINTS = {
     SIGNUP: `${API_V1}/auth/signup`,
     VERIFY_EMAIL: `${API_V1}/auth/verify-email`,
     FORGOT_PASSWORD: `${API_V1}/auth/forgot-password`,
+    USERS: `${API_V1}/auth/users`,
   },
   TICKETS: {
     LIST: `${API_V1}/tickets`,

@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import "../src/index.scss";
 import "../src/Global.scss";
 import "../src/App.scss";
+import "../src/styles/settings.scss";
 import Providers from "./providers";
 
 export const metadata: Metadata = {

@@ -1,7 +1,8 @@
 {
+  "/api/v1/auth/signup/route": "app/api/v1/auth/signup/route.js",
+  "/api/v1/auth/verify-email/route": "app/api/v1/auth/verify-email/route.js",
   "/page": "app/page.js",
   "/(auth)/login/page": "app/(auth)/login/page.js",
   "/(auth)/signup/page": "app/(auth)/signup/page.js",
-  "/(auth)/verify-email/page": "app/(auth)/verify-email/page.js",
-  "/(auth)/welcome/page": "app/(auth)/welcome/page.js"
+  "/(auth)/verify-email/page": "app/(auth)/verify-email/page.js"
 }

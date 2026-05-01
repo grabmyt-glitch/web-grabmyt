@@ -2,10 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "./login.module.scss";
 import { API_ENDPOINTS } from "@/constants/api";
+import { useAuth } from "@/context/AuthContext";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { login } = useAuth();
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -27,10 +32,18 @@ export default function LoginPage() {
       const result = await response.json();
 
       if (result.success) {
-        // Success logic
         console.log("Login successful:", result.data);
-        // Redirect or store token as needed
-        alert(result.message);
+        
+        // Mock user data if API doesn't provide full profile details
+        const userData = result.data?.user || {
+          name: "Arjun Kumar",
+          email: email,
+          token: result.data?.token || "mock-token",
+          avatar: "AK"
+        };
+        
+        login(userData);
+        router.push("/");
       } else {
         setError(result.message || "Login failed");
       }

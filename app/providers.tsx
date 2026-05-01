@@ -3,6 +3,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Navbar from "../src/components/Navbar";
+import { AuthProvider } from "../src/context/AuthContext";
 
 export default function Providers({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -31,9 +32,9 @@ export default function Providers({ children }: { children: ReactNode }) {
   };
 
   return (
-    <>
+    <AuthProvider>
       {!isAuthPage && <Navbar theme={theme} toggleTheme={toggleTheme} />}
       <div className="app-shell">{children}</div>
-    </>
+    </AuthProvider>
   );
 }
