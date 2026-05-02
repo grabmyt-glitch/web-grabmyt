@@ -177,6 +177,57 @@
   outline: none;
 }
 
+.sell-form .antd-field {
+  width: 100%;
+}
+
+.sell-form .antd-field .ant-picker-input > input,
+.sell-form .antd-field .ant-select-selection-item,
+.sell-form .antd-field .ant-select-selection-placeholder {
+  color: #fff;
+}
+
+.sell-form .antd-field.ant-picker,
+.sell-form .antd-field.ant-select .ant-select-selector {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  color: #fff !important;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.sell-form .antd-field .ant-picker-suffix,
+.sell-form .antd-field .ant-select-arrow {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.ant-select-dropdown,
+.ant-picker-dropdown .ant-picker-panel-container {
+  background: #171936 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.ant-select-item {
+  color: #fff !important;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background: rgba(255, 90, 60, 0.22) !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #fff !important;
+}
+
+.ant-select-item-option-content {
+  color: #fff !important;
+}
+
 .sell-form textarea {
   resize: vertical;
 }

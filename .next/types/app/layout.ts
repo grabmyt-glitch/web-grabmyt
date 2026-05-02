@@ -1,4 +1,4 @@
-// File: C:\Users\Sugun\Desktop\New folder\web-grabmyt\app\layout.tsx
+// File: C:\Users\saite\Desktop\Own_projects\web-grabmyt\app\layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

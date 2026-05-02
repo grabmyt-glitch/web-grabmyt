@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect, useRef, Suspense } from "react";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./verify-email.module.scss";
-import { API_ENDPOINTS } from "@/constants/api";
+import { useAppDispatch } from "@/store/hooks";
+import { verifyEmail } from "@/store/slices/authSlice";
 
 function VerifyEmailContent() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "your email";
   const firstName = searchParams.get("firstName") || "there";
@@ -17,7 +18,8 @@ function VerifyEmailContent() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
-  const [verifiedUser, setVerifiedUser] = useState<any>(null);
+  const [verifiedUser, setVerifiedUser] = useState<Record<string, unknown> | null>(null);
+  const verifiedFirstName = typeof verifiedUser?.firstName === "string" ? verifiedUser.firstName : firstName;
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
@@ -82,32 +84,28 @@ function VerifyEmailContent() {
     setError("");
 
     try {
-      const response = await fetch(API_ENDPOINTS.AUTH.VERIFY_EMAIL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const result = await dispatch(
+        verifyEmail({
           email: email,
           otp: otpString,
         }),
-      });
-
-      const result = await response.json();
+      ).unwrap();
 
       if (result.success) {
         setIsVerified(true);
-        setVerifiedUser(result.data);
+              setVerifiedUser((result.data as Record<string, unknown>) ?? null);
         // Store token if needed
-        if (result.data.accessToken) {
-          localStorage.setItem("token", result.data.accessToken);
-          localStorage.setItem("user", JSON.stringify(result.data));
-        }
+              if (typeof result.data?.accessToken === "string") {
+                localStorage.setItem("token", result.data.accessToken);
+                localStorage.setItem("user", JSON.stringify(result.data));
+              }
       } else {
-        setError(result.message || "Verification failed. Please try again.");
+              setError(result.message || "Verification failed. Please try again.");
       }
-    } catch (err) {
-      setError("An error occurred. Please check your connection.");
+    } catch {
+              setError("An error occurred. Please check your connection.");
     } finally {
-      setIsLoading(false);
+              setIsLoading(false);
     }
   };
 
@@ -133,7 +131,7 @@ function VerifyEmailContent() {
             <h1 className={styles.alH}>
               You're all
               <br />
-              set, <em style={{ color: "#00C853" }}>{verifiedUser?.firstName || firstName}!</em>
+              set, <em style={{ color: "#00C853" }}>{verifiedFirstName}!</em>
             </h1>
             <p className={styles.alSub}>
               Your account is verified and ready. Start browsing last-minute deals or list your first ticket.
@@ -162,7 +160,7 @@ function VerifyEmailContent() {
               <div className={styles.successRing}>🎉</div>
               <h2 className={styles.successH}>Email Verified!</h2>
               <p className={styles.successSub}>
-                Welcome to LastPass, {verifiedUser?.firstName || firstName}!
+                Welcome to LastPass, {verifiedFirstName}!
                 <br />
                 Your account is ready to use.
               </p>
@@ -315,4 +313,4 @@ export default function VerifyEmailPage() {
       <VerifyEmailContent />
     </Suspense>
   );
-}
+}

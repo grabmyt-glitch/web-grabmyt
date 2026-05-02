@@ -1,15 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "./signup.module.scss";
-import { API_ENDPOINTS } from "@/constants/api";
+import { useAppDispatch } from "@/store/hooks";
+import { setCurrentUser, signup } from "@/store/slices/authSlice";
+import { validateSignupPayload } from "@/store/payloads";
+import { getUserFromCookie, setUserCookie } from "@/utils/authCookie";
 
 type Role = "buyer" | "seller" | "both";
 
 export default function SignupPage() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const [role, setRole] = useState<Role>("buyer");
   const [formData, setFormData] = useState({
     firstName: "",
@@ -23,6 +27,13 @@ export default function SignupPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    const existingUser = getUserFromCookie();
+    if (existingUser) {
+      router.replace("/settings");
+    }
+  }, [router]);
+
   const getPasswordStrength = (password: string) => {
     if (password.length < 4) return { level: 1, label: "Very weak" };
     if (password.length < 8) return { level: 2, label: "Weak" };
@@ -35,21 +46,22 @@ export default function SignupPage() {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    if (!formData.email.includes("@")) {
-      newErrors.email = "Enter a valid email address";
-    }
-
-    if (formData.phone.length < 10) {
-      newErrors.phone = "Phone must be 10 digits";
-    }
-
-    if (formData.password.length < 8) {
-      newErrors.password = "At least 8 characters required";
-    }
+    if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
+    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
 
     if (!agreedToTerms) {
       newErrors.terms = "You must agree to the terms";
     }
+
+    const payloadValidation = validateSignupPayload({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email || undefined,
+      phone: formData.phone || undefined,
+      password: formData.password || undefined,
+    });
+
+    if (payloadValidation) newErrors.server = payloadValidation;
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -63,27 +75,29 @@ export default function SignupPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(API_ENDPOINTS.AUTH.SIGNUP, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const result = await dispatch(
+        signup({
           firstName: formData.firstName,
           lastName: formData.lastName,
-          email: formData.email,
-          password: formData.password,
+          email: formData.email || undefined,
+          phone: formData.phone || undefined,
+          password: formData.password || undefined,
         }),
-      });
-
-      const result = await response.json();
+      ).unwrap();
 
       if (result.success) {
         console.log("Signup successful:", result.data);
+        if (result.data && typeof result.data === "object") {
+          const user = result.data as Record<string, unknown>;
+          dispatch(setCurrentUser(user));
+          setUserCookie(user);
+        }
         // Pass email to verification page
         router.push(`/verify-email?email=${encodeURIComponent(formData.email)}&firstName=${encodeURIComponent(formData.firstName)}`);
       } else {
         setErrors({ server: result.message || "Signup failed" });
       }
-    } catch (err) {
+    } catch {
       setErrors({ server: "An error occurred. Please try again." });
     } finally {
       setIsLoading(false);

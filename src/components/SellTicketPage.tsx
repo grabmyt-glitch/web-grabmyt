@@ -1,7 +1,12 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { API_ENDPOINTS } from '../constants/api';
+import dayjs, { Dayjs } from 'dayjs';
+import { ConfigProvider, DatePicker, Select, TimePicker } from 'antd';
+import 'antd/dist/reset.css';
+import { useAppDispatch } from '@/store/hooks';
+import { createTicket } from '@/store/slices/ticketsSlice';
+import { validateTicketCreatePayload } from '@/store/payloads';
 import './SellTicketPage.scss';
 
 const initialFormState = {
@@ -18,6 +23,7 @@ const initialFormState = {
 };
 
 const SellTicketPage: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [form, setForm] = useState(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
@@ -30,27 +36,46 @@ const SellTicketPage: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatusMessage('');
+
+    const ticketPayload = {
+      from: form.from,
+      to: form.to,
+      place: form.seatInfo,
+      date: form.date,
+      startTime: form.time,
+      endTime: form.time,
+      price: Number(form.listingPrice) || undefined,
+      type: form.ticketType,
+      personalInformation: {
+        email: form.contact.includes('@') ? form.contact : undefined,
+        phone: form.contact,
+      },
+    };
+    const validationError = validateTicketCreatePayload(ticketPayload);
+    if (validationError) {
+      setStatusMessage(validationError);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(API_ENDPOINTS.TICKETS.CREATE, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-
-      if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
-        setStatusMessage(data.message || 'Could not create ticket listing.');
-      } else {
-        setStatusMessage('Ticket listing created successfully.');
-        setForm(initialFormState);
-      }
-    } catch (error) {
+      const result = await dispatch(createTicket(ticketPayload)).unwrap();
+      setStatusMessage(result.message || 'Ticket listing created successfully.');
+      setForm(initialFormState);
+    } catch {
       setStatusMessage('Network error while submitting the ticket.');
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleDateChange = (value: Dayjs | null) => {
+    setForm((prev) => ({ ...prev, date: value ? value.format('YYYY-MM-DD') : '' }));
+  };
+
+  const handleTimeChange = (value: Dayjs | null) => {
+    setForm((prev) => ({ ...prev, time: value ? value.format('HH:mm') : '' }));
   };
 
   return (
@@ -85,14 +110,23 @@ const SellTicketPage: React.FC = () => {
           <div className="sell-badge">Verified last-minute listings</div>
           <Link href="/sell-tickets" className="secondary-link">← Back to home</Link>
         </div>
-        ``
         <div className="sell-ticket-right">
           <div className="form-card">
             <div className="section-tag">Create listing</div>
             <h2>Submit your ticket details</h2>
             <p>Fill the form on the right, set a fair price, and let buyers request your ticket instantly.</p>
 
-            <form className="sell-form" onSubmit={handleSubmit}>
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorPrimary: '#FF5A3C',
+                  colorBgContainer: '#171936',
+                  colorText: '#F5F7FF',
+                  colorBorder: 'rgba(255,255,255,0.12)',
+                },
+              }}
+            >
+              <form className="sell-form" onSubmit={handleSubmit}>
               <div className="form-row">
                 <label>
                   From
@@ -106,21 +140,40 @@ const SellTicketPage: React.FC = () => {
               <div className="form-row">
                 <label>
                   Date
-                  <input type="date" name="date" value={form.date} onChange={handleChange} required />
+                  <DatePicker
+                    className="antd-field"
+                    value={form.date ? dayjs(form.date, 'YYYY-MM-DD') : null}
+                    onChange={handleDateChange}
+                    format="DD/MM/YYYY"
+                    placeholder="Select date"
+                  />
                 </label>
                 <label>
                   Time
-                  <input type="time" name="time" value={form.time} onChange={handleChange} required />
+                  <TimePicker
+                    className="antd-field"
+                    value={form.time ? dayjs(form.time, 'HH:mm') : null}
+                    onChange={handleTimeChange}
+                    format="HH:mm"
+                    minuteStep={5}
+                    placeholder="Select time"
+                  />
                 </label>
               </div>
               <div className="form-row">
                 <label>
                   Ticket type
-                  <select name="ticketType" value={form.ticketType} onChange={handleChange}>
-                    <option value="Train">Train</option>
-                    <option value="Bus">Bus</option>
-                    <option value="Movie">Movie</option>
-                  </select>
+                  <Select
+                    className="antd-field"
+                    value={form.ticketType}
+                    onChange={(value) => setForm((prev) => ({ ...prev, ticketType: value }))}
+                    options={[
+                      { value: 'Train', label: 'Train' },
+                      { value: 'Bus', label: 'Bus' },
+                      { value: 'Movie', label: 'Movie' },
+                    ]}
+                    getPopupContainer={(triggerNode) => triggerNode.parentElement ?? document.body}
+                  />
                 </label>
                 <label>
                   Seat / slot
@@ -152,6 +205,7 @@ const SellTicketPage: React.FC = () => {
                 {isSubmitting ? 'Posting ticket...' : 'Post ticket now'}
               </button>
             </form>
+            </ConfigProvider>
           </div>
         </div>
       </div>

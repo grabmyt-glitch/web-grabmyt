@@ -1,40 +1,60 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "./login.module.scss";
-import { API_ENDPOINTS } from "@/constants/api";
+import { useAppDispatch } from "@/store/hooks";
+import { setCurrentUser, signin } from "@/store/slices/authSlice";
+import { validateSigninPayload } from "@/store/payloads";
+import { getUserFromCookie, setUserCookie } from "@/utils/authCookie";
 
 export default function LoginPage() {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    const existingUser = getUserFromCookie();
+    if (existingUser) {
+      router.replace("/settings");
+    }
+  }, [router]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    const signinPayload = { email, password };
+    const validationError = validateSigninPayload(signinPayload);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      const response = await fetch(API_ENDPOINTS.AUTH.SIGNIN, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const result = await response.json();
+      const result = await dispatch(signin(signinPayload)).unwrap();
 
       if (result.success) {
         // Success logic
         console.log("Login successful:", result.data);
+        if (result.data && typeof result.data === "object") {
+          const user = result.data as Record<string, unknown>;
+          dispatch(setCurrentUser(user));
+          setUserCookie(user);
+        }
         // Redirect or store token as needed
-        alert(result.message);
+        router.push("/settings");
       } else {
         setError(result.message || "Login failed");
       }
-    } catch (err) {
+    } catch {
       setError("An error occurred. Please try again.");
     } finally {
       setIsLoading(false);

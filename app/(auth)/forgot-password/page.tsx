@@ -3,14 +3,24 @@
 import { useState } from "react";
 import Link from "next/link";
 import styles from "./forgot-password.module.scss";
+import { useAppDispatch } from "@/store/hooks";
+import { forgotPassword, resetPassword, verifyReset } from "@/store/slices/authSlice";
+import {
+  validateForgotPasswordPayload,
+  validateResetPasswordPayload,
+  validateVerifyResetPayload,
+} from "@/store/payloads";
 
 type Step = "email" | "sent" | "reset";
 
 export default function ForgotPasswordPage() {
+  const dispatch = useAppDispatch();
   const [step, setStep] = useState<Step>("email");
   const [email, setEmail] = useState("arjun@email.com");
+  const [token, setToken] = useState("");
   const [timer, setTimer] = useState(58);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -34,11 +44,23 @@ export default function ForgotPasswordPage() {
   const passwordsMatch = newPassword === confirmPassword && confirmPassword.length > 0;
 
   const handleSendLink = async () => {
+    const forgotPayload = { email };
+    const validationError = validateForgotPasswordPayload(forgotPayload);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setIsLoading(true);
-    setTimeout(() => {
+    setError("");
+    try {
+      await dispatch(forgotPassword(forgotPayload)).unwrap();
       setIsLoading(false);
       setStep("sent");
-    }, 1500);
+    } catch (err) {
+      setIsLoading(false);
+      setError(typeof err === "string" ? err : "Unable to send reset link.");
+    }
   };
 
   const handleResend = () => {
@@ -47,12 +69,43 @@ export default function ForgotPasswordPage() {
 
   const handleResetPassword = async () => {
     if (!passwordsMatch) return;
+    const resetPayload = { email, newPassword, token };
+    const validationError = validateResetPasswordPayload(resetPayload);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setIsLoading(true);
-    setTimeout(() => {
+    setError("");
+    try {
+      await dispatch(resetPassword(resetPayload)).unwrap();
       setIsLoading(false);
-      // Redirect to login
       window.location.href = "/login";
-    }, 1500);
+    } catch (err) {
+      setIsLoading(false);
+      setError(typeof err === "string" ? err : "Unable to reset password.");
+    }
+  };
+
+  const handleVerifyReset = async () => {
+    const verifyPayload = { email, token };
+    const validationError = validateVerifyResetPayload(verifyPayload);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setIsLoading(true);
+    setError("");
+    try {
+      await dispatch(verifyReset(verifyPayload)).unwrap();
+      setStep("reset");
+    } catch (err) {
+      setError(typeof err === "string" ? err : "Invalid or expired token.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // Step 1: Enter Email
@@ -90,6 +143,7 @@ export default function ForgotPasswordPage() {
             >
               {isLoading ? "Sending..." : "Send Reset Link →"}
             </button>
+            {error && <div className={styles.formError}>⚠️ {error}</div>}
 
             <div className={styles.footerLink}>
               Remember it? <Link href="/login">Back to login</Link>
@@ -125,6 +179,25 @@ export default function ForgotPasswordPage() {
             <button className={styles.submitBtnBlue}>
               Open Email App →
             </button>
+
+            <div className={styles.formGroup} style={{ marginTop: "1rem" }}>
+              <label className={styles.formLabel}>Reset token</label>
+              <div className={styles.formInput}>
+                <div className={styles.fiIcon}>🔐</div>
+                <input
+                  type="text"
+                  value={token}
+                  onChange={(e) => setToken(e.target.value)}
+                  placeholder="Paste token from email"
+                  className={styles.fiText}
+                />
+              </div>
+            </div>
+
+            <button className={styles.submitBtnBlue} onClick={handleVerifyReset} disabled={isLoading || !token}>
+              {isLoading ? "Verifying..." : "Verify Token →"}
+            </button>
+            {error && <div className={styles.formError}>⚠️ {error}</div>}
 
             <div className={styles.resendLink}>
               {timer > 0 ? (
@@ -227,6 +300,7 @@ export default function ForgotPasswordPage() {
           >
             {isLoading ? "Resetting..." : "Reset Password ✓"}
           </button>
+          {error && <div className={styles.formError}>⚠️ {error}</div>}
         </div>
       </div>
     </div>

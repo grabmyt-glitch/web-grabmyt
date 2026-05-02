@@ -1,7 +1,6 @@
 {
   "/page": "app/page.js",
-  "/(auth)/login/page": "app/(auth)/login/page.js",
-  "/(auth)/signup/page": "app/(auth)/signup/page.js",
-  "/(auth)/verify-email/page": "app/(auth)/verify-email/page.js",
-  "/(auth)/welcome/page": "app/(auth)/welcome/page.js"
+  "/settings/page": "app/settings/page.js",
+  "/sell-ticket/page": "app/sell-ticket/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js"
 }

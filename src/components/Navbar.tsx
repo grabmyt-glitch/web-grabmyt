@@ -1,8 +1,9 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import Link from 'next/link';
 import { Moon, SunMedium } from 'lucide-react';
+import { useAppSelector } from '@/store/hooks';
 import './Navbar.scss';
 
 interface NavbarProps {
@@ -11,11 +12,13 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
+  const currentUser = useAppSelector((state) => state.auth.currentUser);
+
   return (
     <nav className="nav">
-      <div className="nav-logo">
+      <Link href="/" className="nav-logo">
         <em>⚡</em>Grab My Ticket
-      </div>
+      </Link>
       <div className="nav-links">
         <a href="#deals" className="nav-link">Browse Deals</a>
         <a href="#how" className="nav-link">How It Works</a>
@@ -31,7 +34,11 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
         <div className="nav-live">
           <div className="live-dot"></div>12 live now
         </div>
-        <Link href="/login" className="nav-login">Log in</Link>
+        {currentUser ? (
+          <Link href="/settings" className="nav-login">Settings</Link>
+        ) : (
+          <Link href="/login" className="nav-login">Log in</Link>
+        )}
         <Link href="/sell-ticket" className="nav-cta">List a Ticket →</Link>
       </div>
     </nav>

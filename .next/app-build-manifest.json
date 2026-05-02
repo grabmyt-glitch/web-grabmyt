@@ -23,23 +23,16 @@
       "static/css/app/(auth)/login/page.css",
       "static/chunks/app/(auth)/login/page.js"
     ],
-    "/(auth)/signup/page": [
+    "/settings/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/(auth)/signup/page.css",
-      "static/chunks/app/(auth)/signup/page.js"
+      "static/chunks/app/settings/page.js"
     ],
-    "/(auth)/verify-email/page": [
+    "/sell-ticket/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/(auth)/verify-email/page.css",
-      "static/chunks/app/(auth)/verify-email/page.js"
-    ],
-    "/(auth)/welcome/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/(auth)/welcome/page.css",
-      "static/chunks/app/(auth)/welcome/page.js"
+      "static/css/app/sell-ticket/page.css",
+      "static/chunks/app/sell-ticket/page.js"
     ]
   }
 }
