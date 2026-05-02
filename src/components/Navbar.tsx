@@ -1,10 +1,11 @@
-﻿'use client';
+"use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Moon, SunMedium } from 'lucide-react';
 import { useAppSelector } from '@/store/hooks';
 import './Navbar.scss';
+import { useAuth } from '@/context/AuthContext';
 
 interface NavbarProps {
   theme: 'dark' | 'light';

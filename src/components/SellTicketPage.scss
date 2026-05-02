@@ -214,7 +214,7 @@
 }
 
 .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-  background: rgba(255, 90, 60, 0.22) !important;
+  background: #2a2f5c !important;
   color: #fff !important;
   font-weight: 600;
 }
@@ -226,6 +226,10 @@
 
 .ant-select-item-option-content {
   color: #fff !important;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) .ant-select-item-option-content {
+  color: #ffffff !important;
 }
 
 .sell-form textarea {

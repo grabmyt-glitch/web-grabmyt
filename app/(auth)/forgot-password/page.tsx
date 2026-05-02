@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./forgot-password.module.scss";
 import { useAppDispatch } from "@/store/hooks";
@@ -24,14 +24,15 @@ export default function ForgotPasswordPage() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
 
   // Timer for resend
-  useState(() => {
+  useEffect(() => {
     if (step === "sent" && timer > 0) {
       const interval = setInterval(() => setTimer((t) => t - 1), 1000);
       return () => clearInterval(interval);
     }
-  });
+  }, [step, timer]);
 
   const getPasswordStrength = (password: string) => {
     if (password.length < 4) return { level: 1, label: "Very weak" };
@@ -64,6 +65,7 @@ export default function ForgotPasswordPage() {
   };
 
   const handleResend = () => {
+    handleSendLink();
     setTimer(58);
   };
 

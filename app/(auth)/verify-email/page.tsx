@@ -109,12 +109,36 @@ function VerifyEmailContent() {
     }
   };
 
-  const handleResend = () => {
-    // In a real app, you'd call a resend OTP API here
-    setTimer(543);
-    setOtp(["", "", "", "", "", ""]);
-    inputRefs.current[0]?.focus();
-    alert("In a production app, this would trigger a new OTP email.");
+  const handleResend = async () => {
+    setIsLoading(true);
+    setError("");
+    
+    try {
+      const response = await fetch(API_ENDPOINTS.AUTH.VERIFY_EMAIL, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          firstName: firstName,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setTimer(543);
+        setOtp(["", "", "", "", "", ""]);
+        inputRefs.current[0]?.focus();
+        setError("");
+        alert("OTP sent! Check your email (or see console for OTP).");
+      } else {
+        setError(result.message || "Failed to resend OTP");
+      }
+    } catch (err) {
+      setError("Failed to resend OTP. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const allFilled = otp.every((digit) => digit !== "");

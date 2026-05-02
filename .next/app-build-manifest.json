@@ -20,7 +20,6 @@
     "/(auth)/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/(auth)/login/page.css",
       "static/chunks/app/(auth)/login/page.js"
     ],
     "/settings/page": [
@@ -33,6 +32,16 @@
       "static/chunks/main-app.js",
       "static/css/app/sell-ticket/page.css",
       "static/chunks/app/sell-ticket/page.js"
+    ],
+    "/settings/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/settings/layout.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }
