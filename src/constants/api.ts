@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.grabmyt.com"; // Provide a default or handle missing URL gracefully
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://web-grabmyt.vercel.app"; // Provide a default or handle missing URL gracefully
 if (!process.env.NEXT_PUBLIC_API_URL) {
   console.warn("Warning: NEXT_PUBLIC_API_URL is not set. Using default.");
 }
