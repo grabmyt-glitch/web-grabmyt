@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useRouter } from "next/navigation";
 import styles from "./login.module.scss";
 import { useAppDispatch } from "@/store/hooks";
 import { setCurrentUser, signin } from "@/store/slices/authSlice";
@@ -40,7 +39,7 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      const result = await dispatch(signin(signinPayload)).unwrap();
+      const result = (await dispatch(signin(signinPayload)).unwrap()) as any;
 
       if (result.success) {
         console.log("Login successful:", result.data);

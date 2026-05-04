@@ -75,7 +75,7 @@ export default function SignupPage() {
     setIsLoading(true);
 
     try {
-      const result = await dispatch(
+      const result = (await dispatch(
         signup({
           firstName: formData.firstName,
           lastName: formData.lastName,
@@ -83,7 +83,7 @@ export default function SignupPage() {
           phone: formData.phone || undefined,
           password: formData.password || undefined,
         }),
-      ).unwrap();
+      ).unwrap()) as any;
 
       if (result.success) {
         console.log("Signup successful:", result.data);

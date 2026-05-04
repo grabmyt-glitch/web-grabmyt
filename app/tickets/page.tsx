@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -13,7 +13,7 @@ export default function TicketsPage() {
     <main style={{ padding: "1rem", maxWidth: "760px", margin: "0 auto" }}>
       <h1>Ticket Actions</h1>
       <p>
-        Create and edit tickets from here. Your ticket list is in <Link href="/settings">Settings -> My Tickets</Link>.
+        Create and edit tickets from here. Your ticket list is in <Link href="/settings">Settings → My Tickets</Link>.
       </p>
       <div style={{ marginTop: "1rem", display: "grid", gap: "0.75rem" }}>
         <Link href="/tickets/create">Create Ticket</Link>

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Navbar from "../src/components/Navbar";
 import ReduxProvider from "@/store/ReduxProvider";
 import AuthBootstrap from "@/store/AuthBootstrap";
+import { AuthProvider } from "@/context/AuthContext";
 
 export default function Providers({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -34,9 +35,11 @@ export default function Providers({ children }: { children: ReactNode }) {
 
   return (
     <ReduxProvider>
-      <AuthBootstrap />
-      {!isAuthPage && <Navbar theme={theme} toggleTheme={toggleTheme} />}
-      <div className="app-shell">{children}</div>
+      <AuthProvider>
+        <AuthBootstrap />
+        {!isAuthPage && <Navbar theme={theme} toggleTheme={toggleTheme} />}
+        <div className="app-shell">{children}</div>
+      </AuthProvider>
     </ReduxProvider>
   );
 }
