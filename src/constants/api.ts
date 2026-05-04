@@ -1,7 +1,6 @@
-﻿const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-
-if (!BASE_URL) {
-  throw new Error("NEXT_PUBLIC_API_URL is not set. Point it to your backend (e.g. http://localhost:5000).");
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.grabmyt.com"; // Provide a default or handle missing URL gracefully
+if (!process.env.NEXT_PUBLIC_API_URL) {
+  console.warn("Warning: NEXT_PUBLIC_API_URL is not set. Using default.");
 }
 
 const API_V1 = `${BASE_URL}/api/v1`;
