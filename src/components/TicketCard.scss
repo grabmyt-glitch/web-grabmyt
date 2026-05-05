@@ -1,8 +1,8 @@
 .ticket-card {
-  background-color: var(--card-bg);
+  background-color: var(--card);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
@@ -11,9 +11,9 @@
   cursor: pointer;
 
   &:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     box-shadow: var(--shadow-lg);
-    border-color: rgba(255, 90, 60, 0.3);
+    border-color: var(--accent);
   }
 }
 
@@ -21,7 +21,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px 0;
+  padding: 20px 20px 0;
   margin-bottom: 12px;
 }
 
@@ -29,20 +29,21 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background-color: rgba(255, 90, 60, 0.1);
-  color: var(--primary);
-  padding: 4px 10px;
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  padding: 6px 12px;
   border-radius: var(--radius-full);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  font-family: var(--font-heading);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  text-transform: uppercase;
 }
 
 .ticket-type {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--secondary);
-  background-color: rgba(30, 58, 138, 0.08);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--blue);
+  background-color: rgba(37, 99, 235, 0.08);
   padding: 4px 12px;
   border-radius: var(--radius-sm);
   text-transform: uppercase;
@@ -50,12 +51,12 @@
 }
 
 .ticket-image {
-  height: 120px;
+  height: 140px;
   background-size: cover;
   background-position: center;
   margin: 0 20px 16px;
   border-radius: var(--radius-md);
-  background-color: #eee;
+  background-color: var(--bg);
 }
 
 .ticket-content {
@@ -66,9 +67,11 @@
 }
 
 .ticket-title {
-  font-size: 20px;
-  color: var(--text-main);
-  margin-bottom: 16px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 14px;
   line-height: 1.3;
 }
 
@@ -77,20 +80,20 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  background-color: #FEF2F2;
-  padding: 10px 12px;
+  background-color: rgba(239, 68, 68, 0.05);
+  padding: 10px 14px;
   border-radius: var(--radius-md);
-  border: 1px dashed rgba(255, 90, 60, 0.3);
+  border: 1px dashed rgba(239, 68, 68, 0.2);
 }
 
 .timer-container {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--primary);
+  color: var(--red);
   font-weight: 700;
-  font-family: var(--font-heading);
-  font-size: 15px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 14px;
 
   .pulse-icon {
     animation: ticker 1s infinite;
@@ -101,8 +104,8 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--text-muted);
-  font-size: 13px;
+  color: var(--text3);
+  font-size: 12px;
   font-weight: 500;
 }
 
@@ -118,17 +121,17 @@
   }
 
   .original-price {
-    font-size: 14px;
-    color: var(--text-muted);
+    font-size: 13px;
+    color: var(--text3);
     text-decoration: line-through;
     margin-bottom: 2px;
   }
 
   .discounted-price {
-    font-size: 28px;
-    color: var(--primary);
-    font-weight: 700;
-    font-family: var(--font-heading);
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 24px;
+    color: var(--text);
+    font-weight: 800;
     line-height: 1;
   }
 
@@ -136,12 +139,12 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    color: #F59E0B;
-    font-size: 13px;
-    font-weight: 600;
+    color: var(--amber);
+    font-size: 12px;
+    font-weight: 700;
 
     .zap-icon {
-      fill: #F59E0B;
+      fill: var(--amber);
     }
   }
 }
@@ -151,21 +154,27 @@
 
   .grab-btn {
     width: 100%;
-    background-color: var(--primary);
+    background-color: var(--accent);
     color: white;
-    font-size: 16px;
-    font-weight: 600;
-    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Bricolage Grotesque', sans-serif;
     padding: 14px 0;
     border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
     transition: all 0.2s ease;
-    animation: pulse-btn 2s infinite;
+    min-height: 48px; /* Touch friendly */
 
     &:hover {
-      background-color: var(--primary-hover);
+      background-color: #ff7a4a;
       transform: scale(1.02);
-      box-shadow: var(--shadow-glow);
-      animation: none;
+      box-shadow: 0 10px 20px rgba(255, 109, 45, 0.2);
     }
   }
+}
+
+@keyframes ticker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }

@@ -1,23 +1,4 @@
 :root {
-  --bg: #06060E;
-  --surf: rgba(12, 12, 26, 0.9);
-  --card: #101024;
-  --border: rgba(255, 255, 255, 0.08);
-  --nav-bg: rgba(6, 6, 14, 0.92);
-  --text: #F2F2FF;
-  --text2: #B8C2FF;
-  --text3: #8888AA;
-  --muted: rgba(255, 255, 255, 0.6);
-  --accent: #FF4500;
-  --accent-soft: rgba(255, 90, 60, 0.18);
-  --blue: #0A84FF;
-  --green: #00C853;
-  --red: #FF2D55;
-  --amber: #FF9500;
-  --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
-}
-
-.light-theme {
   --bg: #F8F9FD;
   --surf: rgba(255, 255, 255, 0.88);
   --card: #FFFFFF;
@@ -33,10 +14,18 @@
   --green: #10B981;
   --red: #EF4444;
   --amber: #F59E0B;
-  --shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.12);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
 }
 
-*, *::before, *::after {
+
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -63,7 +52,7 @@ body::before {
   opacity: 0.4;
 }
 
-.light-theme body::before {
+body::before {
   opacity: 0.18;
 }
 
@@ -94,7 +83,7 @@ section {
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -2px;
-  color: var(--text);
+  color: #FF6D2D !important;
   margin-bottom: 14px;
 }
 
@@ -127,11 +116,11 @@ body::before {
 }
 
 ::-webkit-scrollbar-track {
-  background: #06060E;
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #222240;
+  background: var(--border);
   border-radius: 4px;
 }
 
@@ -182,6 +171,7 @@ section {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

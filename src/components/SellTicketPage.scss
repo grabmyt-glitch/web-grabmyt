@@ -1,274 +1,261 @@
 .sell-ticket-page {
-  min-height: calc(100vh - 66px);
-  background: #06060e;
-  padding: 100px 5%;
+  min-height: calc(100vh - 72px);
+  background: var(--bg);
+  padding: 60px 5% 40px;
+
+  @media (min-width: 1024px) {
+    padding: 100px 5% 80px;
+  }
 }
 
 .sell-ticket-shell {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 40px;
-  align-items: stretch;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: flex-start;
+  }
 }
 
 .sell-ticket-left,
 .sell-ticket-right {
-  background: #101024;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surf);
+  border: 1px solid var(--border);
   border-radius: 28px;
-  padding: 36px;
-}
+  padding: 24px;
+  box-shadow: var(--shadow);
 
-.sell-ticket-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @media (min-width: 768px) {
+    padding: 40px;
+  }
 }
 
 .sell-ticket-left h1 {
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: clamp(38px, 3.5vw, 50px);
-  line-height: 1.05;
-  margin: 18px 0;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 20px;
 }
 
 .sell-ticket-left p {
-  color: #d1d3e0;
-  line-height: 1.85;
+  color: var(--text2);
+  font-size: 16px;
+  line-height: 1.7;
   max-width: 520px;
   margin-bottom: 32px;
-}
-
-.sell-card-visual {
-  margin-bottom: 30px;
 }
 
 .ticket-illustration {
   position: relative;
   width: 100%;
-  min-height: 240px;
-  background: linear-gradient(135deg, rgba(255, 69, 0, 0.18), rgba(10, 132, 255, 0.14));
+  min-height: 220px;
+  background: linear-gradient(135deg, rgba(255, 109, 45, 0.1), rgba(37, 99, 235, 0.1));
+  border: 1px solid var(--border);
   border-radius: 24px;
   padding: 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 32px;
 }
 
 .ticket-chip {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.3);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .ticket-bar {
   width: 100%;
   height: 8px;
-  margin: 18px 0;
-  background: rgba(255, 255, 255, 0.18);
-  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin: 16px 0;
 }
 
 .ticket-label {
-  color: #fff;
+  color: var(--text);
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 800;
+  font-family: 'Bricolage Grotesque', sans-serif;
 }
 
 .ticket-price {
-  font-size: 28px;
-  font-weight: 800;
-  color: #ffb830;
-}
-
-.sell-usage {
-  margin-bottom: 24px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--accent);
 }
 
 .sell-usage h2 {
-  font-size: 20px;
-  margin-bottom: 16px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 20px;
 }
 
 .sell-usage ul {
   list-style: none;
   display: grid;
-  gap: 12px;
+  gap: 16px;
 }
 
 .sell-usage li {
   position: relative;
-  padding-left: 28px;
-  color: #d1d3e0;
-  line-height: 1.8;
-}
+  padding-left: 32px;
+  color: var(--text2);
+  font-size: 15px;
+  line-height: 1.6;
 
-.sell-usage li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: #00c853;
-  font-weight: 800;
+  &::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--green);
+    font-weight: 900;
+    font-size: 18px;
+  }
 }
 
 .sell-badge {
   display: inline-flex;
-  padding: 10px 18px;
-  background: rgba(0, 200, 83, 0.1);
-  border: 1px solid rgba(0, 200, 83, 0.22);
-  color: #00c853;
+  padding: 8px 16px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  color: var(--green);
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 700;
   margin-bottom: 24px;
-}
-
-.secondary-link {
-  color: #8888aa;
-  font-size: 14px;
-  text-decoration: none;
-}
-
-.sell-ticket-right .section-tag {
-  margin-bottom: 14px;
+  text-transform: uppercase;
 }
 
 .sell-ticket-right h2 {
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 32px;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text);
   margin-bottom: 12px;
 }
 
 .sell-ticket-right p {
-  color: #d1d3e0;
-  line-height: 1.75;
-  margin-bottom: 28px;
+  color: var(--text2);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 32px;
 }
 
 .sell-form {
   display: grid;
-  gap: 16px;
+  gap: 20px;
 }
 
 .form-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .sell-form label {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  font-size: 14px;
-  color: #fff;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text2);
 }
 
 .sell-form input,
 .sell-form select,
 .sell-form textarea {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  color: #fff;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text);
   padding: 14px 16px;
-  font-size: 14px;
+  font-size: 15px;
+  font-family: 'DM Sans', sans-serif;
   outline: none;
+  transition: all 0.2s;
+
+  &:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
 }
 
-.sell-form .antd-field {
-  width: 100%;
-}
-
-.sell-form .antd-field .ant-picker-input > input,
-.sell-form .antd-field .ant-select-selection-item,
-.sell-form .antd-field .ant-select-selection-placeholder {
-  color: #fff;
-}
-
+/* Ant Design overrides for light theme */
 .sell-form .antd-field.ant-picker,
 .sell-form .antd-field.ant-select .ant-select-selector {
-  background: rgba(255, 255, 255, 0.04) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 16px !important;
-  color: #fff !important;
-  min-height: 50px;
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 14px !important;
+  color: var(--text) !important;
+  min-height: 52px;
   display: flex;
   align-items: center;
+
+  &:hover, &:focus {
+    border-color: var(--accent) !important;
+  }
 }
 
-.sell-form .antd-field .ant-picker-suffix,
-.sell-form .antd-field .ant-select-arrow {
-  color: rgba(255, 255, 255, 0.65);
+.sell-form .ant-select-selection-item,
+.sell-form .ant-select-selection-placeholder {
+  color: var(--text) !important;
 }
 
-.ant-select-dropdown,
-.ant-picker-dropdown .ant-picker-panel-container {
-  background: #171936 !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-}
-
-.ant-select-item {
-  color: #fff !important;
-}
-
-.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-  background: #2a2f5c !important;
-  color: #fff !important;
-  font-weight: 600;
-}
-
-.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: #fff !important;
+.ant-select-dropdown {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
 }
 
 .ant-select-item-option-content {
-  color: #fff !important;
+  color: var(--text) !important;
 }
 
-.ant-select-item-option-selected:not(.ant-select-item-option-disabled) .ant-select-item-option-content {
-  color: #ffffff !important;
-}
-
-.sell-form textarea {
-  resize: vertical;
+.ant-select-item-option-selected {
+  background: var(--accent-soft) !important;
 }
 
 .primary-btn {
-  margin-top: 10px;
-  background: linear-gradient(135deg, #FF4500, #FF6830);
-  border: none;
+  background: var(--accent);
   color: #fff;
-  padding: 16px 24px;
+  padding: 18px 32px;
   border-radius: 16px;
-  font-weight: 700;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  border: none;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
+  transition: all 0.2s;
+  min-height: 56px;
+  margin-top: 12px;
 
-.primary-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(255, 69, 0, 0.2);
-}
-
-.primary-btn:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-
-.form-status {
-  color: #ffb830;
-  font-size: 14px;
-}
-
-@media (max-width: 1080px) {
-  .sell-ticket-shell {
-    grid-template-columns: 1fr;
+  &:hover:not(:disabled) {
+    background: #ff7a4a;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(255, 109, 45, 0.2);
   }
 
-  .form-row {
-    grid-template-columns: 1fr;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
