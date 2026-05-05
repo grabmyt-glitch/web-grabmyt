@@ -264,9 +264,9 @@ $text3: #999999;
     color: $text3;
   }
 
-  &:hover:not(.sel) {
-    border-color: darken($bdr, 10%);
-  }
+  // &:hover:not(.sel) {
+  //   border-color: darken($bdr, 10%);
+  // }
 }
 
 // Form Row
@@ -510,10 +510,10 @@ $text3: #999999;
   cursor: pointer;
   transition: all 0.2s ease;
 
-  &:hover {
-    background: darken($surf, 3%);
-    border-color: darken($bdr, 10%);
-  }
+  // &:hover {
+  //   background: darken($surf, 3%);
+  //   border-color: darken($bdr, 10%);
+  // }
 }
 
 // Submit Button

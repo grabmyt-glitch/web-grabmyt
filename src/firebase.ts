@@ -19,8 +19,17 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+let app;
+try {
+  if (getApps().length > 0) {
+    app = getApp();
+  } else if (firebaseConfig.apiKey) {
+    app = initializeApp(firebaseConfig);
+  }
+} catch (error) {
+  console.error("Firebase initialization error:", error);
+}
 
 // Initialize Firestore and Auth
-export const db = getFirestore(app);
-export const auth = getAuth(app);
+export const db = app ? getFirestore(app) : null;
+export const auth = app ? getAuth(app) : null;

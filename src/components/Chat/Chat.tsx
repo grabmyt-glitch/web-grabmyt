@@ -22,7 +22,7 @@ const Chat: React.FC<ChatProps> = ({ buyerId, sellerId, ticketId }) => {
   const [newMessage, setNewMessage] = useState("");
   const [chatId, setChatId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState<User | null>(auth.currentUser);
+  const [currentUser, setCurrentUser] = useState<User | null>(auth?.currentUser || null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
@@ -35,6 +35,7 @@ const Chat: React.FC<ChatProps> = ({ buyerId, sellerId, ticketId }) => {
   }, [messages]);
 
   useEffect(() => {
+    if (!auth) return;
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
     });
